@@ -1,0 +1,85 @@
+<!--
+	Muestra la forma de  usar documentos JSON y convertirlos a objetos Javascript con la funcion eval().
+	En este ejemplo no se hace ninguna peticion al servidor.
+
+	Author: Gonzalo Silverio   gonzasilve@gmail.com
+	Fuente: http://gonzasilve.wordpress.com
+	Archivo: ejemplo_json0.html
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+  <link REL="SHORTCUT ICON" href="tux_icon.ico">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+	<title> Ejemplo con Objetos documento JSON </title>
+	<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+	<script language="javascript" type="text/javascript">
+	$(document).ready(function() {
+		var miEnlace = $('#enlace');
+		//Asignar funcion controladora a evento click del enlace
+		miEnlace.click(mostrarDatos);
+		mostrarTabla();
+	});
+
+	//Definimos un pequeño documento JSON en una variable
+	var cadenaJSON = "{"+
+		"'nombre' : 'Gonzalo',"+
+		"'apellidos' : 'Silverio Silverio',"+
+		"'carrera' : 'Ingenieria en sistemas'"+
+	"}";
+
+	//Muestra una tabla con los datos del objeto JSON
+	function mostrarTabla() {
+		//Convertir el documento JSON a Objeto Javascript
+		var objCadena = eval('(' + cadenaJSON + ')');
+		
+		//Crear filas con datos
+		var str_FilaNombre = "<tr><td>Nombre</td><td>"+objCadena.nombre+"</td></tr>";
+		var str_FilaApellidos = "<tr><td>Apellidos</td><td>"+objCadena.apellidos+"</td></tr>";
+		var str_FilaCarrera = "<tr><td>Carrera</td><td>"+objCadena.carrera+"</td></tr>";
+		
+		//Agregar filas a la tabla
+		$('#tbl_Datos > tbody:last').append(str_FilaNombre);
+		$('#tbl_Datos > tbody:last').append(str_FilaApellidos);
+		$('#tbl_Datos > tbody:last').append(str_FilaCarrera);
+		
+		//Agregar clases
+		$('#tbl_Datos td:first-child').addClass("classGris");		//Fondo gris solo primera columna
+		$('#tbl_Datos td').addClass("classBorde");					//Borde de celdas
+		
+	}
+	
+	//Muestra una alerta con los datos del objeto JSON
+	function mostrarDatos() {
+		//Convertir el documento JSON a Objeto Javascript
+		var objCadena = eval('(' + cadenaJSON + ')');
+		
+		//Mostrar los valores del objeto JSON al usuario
+		var str_Nombre = "Nombre: "+objCadena.nombre+"\n";
+		var str_Apellidos = "Apellidos: "+objCadena.apellidos+"\n";
+		var str_Carrera = "Carrera: "+objCadena.carrera+"\n";
+		alert(str_Nombre+str_Apellidos+str_Carrera);
+			
+	}
+	
+  </script>
+	
+	<style type="text/css">
+		.classGris {		background-color: #F0F0F0; }
+		.classBorde {		border: 1px solid #F0F0F0;	}
+	</style>
+	</head>
+<body >
+
+	<h3>Ejemplo documento JSON</h3>
+	Da click en el enlace para realizar el test<br/>
+	&nbsp;&nbsp;<a href="#" id="enlace" >Realizar test</a><br/><br/>
+	
+	<!--	Tabla de datos	-->
+	<table id="tbl_Datos" border="0">
+		<tbody>
+		
+		</tbody>
+	</table>
+</body>
+<html>

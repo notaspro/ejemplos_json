@@ -1,0 +1,61 @@
+<!--
+	Declaracion de arrays literales de 2 y 3 dimensiones con diferentes tipos de datos
+	Author: Gonzalo Silverio	gonzasilve@gmail.com
+	Fuente: http://gonzasilve.wordpress.com
+	Archivo: ej_javascriptJson2.html
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+	<link REL="SHORTCUT ICON" href="tux_icon.ico">
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <title>.::Ejemplo arrays Literales de varias dimensiones -Javascript::.</title>
+	<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+
+    <script type="text/javascript">
+		var miPaginaWeb = $(document);
+		miPaginaWeb.ready(inicializaJQuery);	
+		
+		function inicializaJQuery() {
+			var miEnlace = $('#enlace');
+			//Asignar funcion controladora a evento click de enlace
+			miEnlace.click(testArrays);			
+		}
+			
+		//Funcion controladora de evento de enlace
+		function testArrays() {			
+			//Dos dimensiones
+			var paises = [["Estados unidos", "México", "Colombia"], "China", "Irak"];
+			//Mostrar los valores
+			var strPaises = 'Arreglo bidimensional, Los paises son:\n';
+			strPaises += 'paises[0][0]: '+paises[0][0]+'\n';		//Estados unidos
+			strPaises += 'paises[0][1] '+paises[0][1]+'\n';		//México
+			strPaises += 'paises[1]: '+paises[1];		//China
+			alert( strPaises );	
+			
+			
+			//Tres dimensiones
+			paises = [["Estados unidos", ["Distrito Federal","Veracruz","Queretaro","..."], "Colombia"], "China", "Irak"];
+			//Mostrar los valores
+			strPaises = 'Arreglo dimension 3, Los paises son:\n';
+			strPaises += 'paises[0][0]: '+paises[0][0]+'\n';		//Estados unidos
+			strPaises += 'paises[0][1][0]: '+paises[0][1][0]+'\n';		//Distrito Federal
+			strPaises += 'paises[0][1][1]: '+paises[0][1][1]+'\n';	//Veracruz
+			strPaises += 'paises[0][1]: '+paises[0][2]+'\n';		//Colombia
+			strPaises += 'paises[1]: '+paises[1];		//China
+			alert( strPaises );			
+		}
+			
+    </script>
+   </head>
+
+   <body>
+		 <h3>Ejemplo con arreglos literales (dos y tres dimensiones)</h3>
+		 Da click en el enlace para realizar la prueba:
+		<br/><br/>
+		&nbsp;&nbsp;&nbsp;<a href="#" id="enlace">Dame click</a>		
+		<br/>
+		
+   </body>
+</html>
+

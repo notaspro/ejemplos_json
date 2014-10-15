@@ -1,0 +1,85 @@
+<!--
+	Uso de objetos literales con diferentes tipos de datos
+	Author: Gonzalo Silverio	gonzasilve@gmail.com
+	Fuente: http://gonzasilve.wordpress.com
+	Archivo: ej_javascriptJson3.html
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+   	<link REL="SHORTCUT ICON" href="tux_icon.ico">
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <title>.::Ejemplo Objetos Literales Javascript::.</title>
+	<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+
+	<script type="text/javascript">
+		var miPaginaWeb = $(document);
+		miPaginaWeb.ready(inicializaJQuery);
+
+		function inicializaJQuery() {
+			var miEnlace = $('#enlace');
+			//Asignar funcion controladora a evento click del enlace
+			miEnlace.click(testObjetosJSON);
+		}
+
+		//Funcion controladora de evento click del enlace
+		function testObjetosJSON() {
+			//EJEMPLO 1: Objeto literal con items de texto
+			var nomVariableObjeto = {
+				'nombre':'Gonzalo',
+				'apellido':'Silverio',
+				'matricula':"05ab77",
+				'carrera':"I.S.C."
+			};
+			var detalleAlumno = "Datos del alumno:\n";
+			detalleAlumno += 'Matricula: '+nomVariableObjeto.matricula+'\n';
+			detalleAlumno += 'Nombre: '+nomVariableObjeto.nombre+' '+nomVariableObjeto.apellido+'\n';
+			detalleAlumno += 'Carrera: '+nomVariableObjeto.carrera;
+			alert(detalleAlumno);
+
+			//Mostrar nuevamente los datos pero por medio de indices
+			detalleAlumno = "Datos del alumno:\n";
+			detalleAlumno += 'Matricula: '+nomVariableObjeto['matricula']+'\n';
+			detalleAlumno += 'Nombre: '+nomVariableObjeto['nombre']+' '+nomVariableObjeto['apellido']+'\n';
+			detalleAlumno += 'Carrera: '+nomVariableObjeto['carrera'];
+			alert(detalleAlumno);
+
+
+			//EJEMPLO 2: Objeto literal con diferentes tipos de items
+			var varObjetoAlumno = {
+				'matricula':"05ab77",
+				'nombre':'Gonzalo Silverio',
+				'materias':['Matematicas discretas','Fisica II','Metodos numericos'],
+				'becado':true,
+				'promedio':8.53
+			};
+			var strMaterias='';			
+			for(var i=0; i<(varObjetoAlumno.materias.length-1); i++)
+				strMaterias += varObjetoAlumno.materias[i]+', ';
+
+			strMaterias += varObjetoAlumno.materias[i];
+
+			detalleAlumno = "Datos del alumno:\n";
+			detalleAlumno += 'Matricula: '+varObjetoAlumno.matricula+'\n';
+			detalleAlumno += 'Nombre: '+varObjetoAlumno.nombre+'\n';
+			detalleAlumno += 'Materias: '+strMaterias+'\n';
+			detalleAlumno += 'Esta becado: '+varObjetoAlumno.becado+'\n';
+			detalleAlumno += 'Promedio general: '+varObjetoAlumno.promedio;
+			alert(detalleAlumno);
+
+		}
+
+		//Cuando hay contacto con el server hay k convertir lo que nos devuelve éste a objeto Javascript con la funcion eval() de javascript
+
+	</script>
+   </head>
+   <body>
+		 <h3>Ejemplo con objetos literales</h3>
+		 Da click en el enlace para realizar la prueba:
+		<br/><br/>
+		&nbsp;&nbsp;&nbsp;<a href="#" id="enlace">Dame click</a>
+		<br/>
+
+   </body>
+</html>
+

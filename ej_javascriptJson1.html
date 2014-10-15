@@ -1,0 +1,57 @@
+<!--
+	Declaracion de arrays literales con diferentes tipos de datos
+	Author: Gonzalo Silverio	gonzasilve@gmail.com
+	Fuente: http://gonzasilve.wordpress.com
+	Archivo: ej_javascriptJson1.html
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+   	<link REL="SHORTCUT ICON" href="tux_icon.ico">
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <title>.::Ejemplo arrays Literales Javascript::.</title>
+	<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+
+    <script type="text/javascript">
+		var miPaginaWeb = $(document);
+		miPaginaWeb.ready(inicializaJQuery);	
+		
+		function inicializaJQuery() {
+			var miEnlace = $('#enlace');
+			//Asignar funcion controladora a evento click de enlace
+			miEnlace.click(testArrays);			
+		}
+			
+		//Funcion controladora de evento de enlace
+		function testArrays() {
+			//Array con items de texto
+			var arrayColores = [ 'Azul', 'Verde', 'blanco', 'Rosa' ];			
+			//Mostrar los valores
+			alert( 'Los colores son: '+arrayColores[0]+', '+arrayColores[1]+', '+arrayColores[2] );
+			
+			//Array con items de texto y numeros
+			var arrayCompra = [ 'Papas adobadas 30 gr.', 8.50, true, 2, 'Axel Hernandez' ];		
+			//Mostrar los valores
+			var detalleCompra = 'Detalle de compra:\n';
+			detalleCompra += 'Producto: '+arrayCompra[0]+'\n';
+			detalleCompra += 'Precio: '+arrayCompra[1]+'\n';
+			detalleCompra += 'Tiene descuento: '+arrayCompra[2]+'\n';
+			detalleCompra += 'Valor descuento: '+arrayCompra[3]+'\n';
+			detalleCompra += 'Empleado que atendio: '+arrayCompra[4]+'\n';
+			detalleCompra += 'Importe a pagar: '+(arrayCompra[1]-arrayCompra[3]);
+			alert( detalleCompra );			
+		}
+			
+    </script>
+   </head>
+
+   <body>
+		 <h3>Ejemplo con arreglos literales</h3>
+		 Da click en el enlace para realizar la prueba:
+		<br/><br/>
+		&nbsp;&nbsp;&nbsp;<a href="#" id="enlace">Dame click</a>		
+		<br/>
+		
+   </body>
+</html>
+

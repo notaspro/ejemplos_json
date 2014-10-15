@@ -1,0 +1,106 @@
+<?php
+/*
+	Muestra la forma de  usar objetos literales Javascript, con funciones anonimas.
+	
+	Author: Gonzalo Silverio   gonzasilve@gmail.com
+	Fuente: http://gonzasilve.wordpress.com	
+	Archivo: ej_javascriptJson4.html
+*/
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+  	<link REL="SHORTCUT ICON" href="tux_icon.ico">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+	<title> Ejemplo con Objetos Javascript </title>
+  <script language="javascript" type="text/javascript">
+    //Definimos un pequeño objeto Javascript llamado persona
+    //Con una funcion anonima
+    var persona = {
+      "nombre": "Gonzalo",
+      "apellidos": "Silverio Silverio",
+      "carrera": "Ingenieria en sistemas",
+      "saludar": function(aquien) {
+				var mensaje=  "Que tal! ¿Como estás " + aquien + "?\n Yo soy " + this.nombre + " "+this.apellidos+
+				" y estudie "+this.carrera+", hasta pronto.\n\nSigue visitandome!";				
+        alert(mensaje);
+      }
+    };
+
+    function muestra_Nom() {
+      var miObjeto = eval(persona);
+      alert("El nombre es: " + miObjeto.nombre);
+    }
+
+    function muestra_Ape() {
+      var miObjeto = eval(persona);
+      alert("El apellido es: " + miObjeto.apellidos);
+    }
+
+    function muestra_Car() {
+      var miObjeto = eval(persona);
+      alert("La carrera es: " + miObjeto.carrera);
+    }
+
+    function muestra_Todos() {
+      var miObjeto = eval(persona);
+      alert("El nombre es: " + miObjeto.nombre +
+    		  "\nEl apellido es: " + miObjeto.apellidos +
+    		  "\nLa carrera es: " + miObjeto.carrera);
+    }
+		
+    function saludar() {
+			//Validar que haya escrito un nombre 
+			if(trim(document.pruebaForm.nombre.value) =='' ) { 
+				alert('Escriba un nombre!');
+				document.pruebaForm.nombre.value='';
+				document.pruebaForm.nombre.focus();
+				return;
+			}
+      var miObjeto = eval(persona);
+			miObjeto.saludar(document.pruebaForm.nombre.value);
+    }
+		
+		//QUITA ESPACIOS AL FINAL Y AL INICIO DE UNA CADENA		
+		function trim(cadena)		{
+			for(i=0; i<cadena.length; )
+			{
+				if(cadena.charAt(i)==" ")
+					cadena=cadena.substring(i+1, cadena.length);
+				else
+					break;
+			}
+			
+			for(i=cadena.length-1; i>=0; i=cadena.length-1)
+			{
+				if(cadena.charAt(i)==" ")
+					cadena=cadena.substring(0,i);
+				else
+					break;
+			}
+			
+			return cadena;
+		}
+		
+  </script>
+	
+
+		
+	</head>
+<body onLoad="document.pruebaForm.nombre.focus();">
+<br><br>
+<h3>Ejemplo con Objetos literales Javascript</h3>
+
+	<form name="pruebaForm" id= "pruebaForm" >
+		<label for="nombre">Escriba un Nombre: </label><input type = "text" name="nombre" id="nombre" size="60">
+	</form>
+	Da click en un enlace para ver el valor:
+	<ul>
+		<li value="1"><a href="#" onClick="javascript: muestra_Nom();">Nombre</a></li>
+		<li value="2"><a href="#" onClick="javascript: muestra_Ape();">Apellidos</a></>
+		<li value="3"><a href="#" onClick="javascript: muestra_Car();">Carrera</a></>
+		<li value="3"><a href="#" onClick="javascript: muestra_Todos();">Muestra todos los datos</a></>
+		<li value="4"><a href="#" onClick="javascript: saludar();">Saludar!</a></>
+	</ul>
+</body>
+<html>

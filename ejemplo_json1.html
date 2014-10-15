@@ -1,0 +1,118 @@
+<!--
+	Muestra la forma de  usar documentos JSON y convertirlos a objetos Javascript con la funcion eval().
+	En este ejemplo no se hace ninguna peticion al servidor.
+
+	Author: Gonzalo Silverio   gonzasilve@gmail.com
+	Fuente: http://gonzasilve.wordpress.com
+	Archivo: ejemplo_json1.html
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+  <link REL="SHORTCUT ICON" href="tux_icon.ico">
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+	<title> Ejemplo con Objetos documento JSON </title>
+	<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+	<script language="javascript" type="text/javascript">
+		$(document).ready(function() {
+			var miEnlace = $('#enlace');
+			//Asignar funcion controladora a evento click del enlace
+			miEnlace.click(mostrarDatos);
+		});
+
+
+	//Definimos un pequeño documento JSON en una variable
+	var cadenaJSON = "{"+
+		"'desarrollador' : 'Xavier Landa',"+
+		"'depto' : 'Sistemas (SI)',"+
+		"'email' : 'ej_email@dominio.com',"+
+		"'genero' : 'h',"+
+		"'direccion':['Benito Juarez',3,'Lomas de Chapultepec','D.F.'],"+
+		"'tel' : '123000987',"+
+		"'proyectos':["+
+			"{"+
+				"'codigo' : 	'xs2012',"+
+				"'nombre' : 	'XenixSoft',"+
+				"'url'		 : 	'http://gonzasilve.wordpress.com',"+
+				"'prioridad' : 1"+
+			"},"+
+			"{"+
+				"'codigo' : 	'msw2012',"+
+				"'nombre' :		'Mantenimiento website oficial',"+
+				"'url'		 :  'http://shalo.site50.net',"+
+				"'prioridad' : 2"+
+			"},"+
+			"{"+
+				"'codigo' : 	'plg2011',"+
+				"'nombre' :		'Plugin DB Converter',"+
+				"'url'		 :  'http://gonzasilve.260mb.com',"+
+				"'prioridad' : 0"+
+			"}"+
+		"]"+
+	"}";
+
+
+	function mostrarDatos() {
+		//Convertir el documento JSON a Objeto Javascript
+		var objCadena = eval('(' + cadenaJSON + ')');
+		
+		//Crear filas con datos
+		var str_FilaNombre = "<tr><td>Desarrollador</td><td>"+objCadena.desarrollador+"</td></tr>";
+		var str_FilaDepto = "<tr><td>Departamento</td><td>"+objCadena.depto+"</td></tr>";
+		var str_Genero = (objCadena.genero=='h') ? "Masculino" : "Femenino";
+		var str_FilaGenero = "<tr><td>Sexo</td><td>"+str_Genero+"</td></tr>";
+		var str_direccion = "calle "+objCadena.direccion[0]+
+		" #"+objCadena.direccion[1]+
+		", colonia "+objCadena.direccion[2]+
+		", "+objCadena.direccion[3];
+		var str_FilaDireccion = "<tr><td>Direccion</td><td>"+str_direccion+"</td></tr>";
+		//alert(str_direccion);
+
+		var tx_prioridad = new Array("Importante","Normal","Baja");
+		var projects = objCadena.proyectos;
+		var strProyectos = "";
+		for (var g = 0 ; g < (projects.length-1) ; g++) {
+			strProyectos += 'Nombre del proyecto: ' + "<b>["+projects[g].codigo+"] "+ projects[g].nombre + '</b><br/>'+
+			'Sitio web: <b><a href="' + projects[g].url + '">' + projects[g].url + '</a></b><br/>'+
+			'Prioridad: <b>'+tx_prioridad[ projects[g].prioridad ]+'</b><br/><br/>';
+		}
+		strProyectos += 'Nombre del proyecto: ' + "<b>["+projects[g].codigo+"] "+ projects[g].nombre + '</b><br/>'+
+		'Sitio web: <b><a href="' + projects[g].url + '">' + projects[g].url + '</a></b><br/>'+
+		'Prioridad: <b>'+tx_prioridad[ projects[g].prioridad ]+'</b><br/><br/>';
+
+		//alert(strProyectos);
+		var str_FilaProyectos = "<tr><td>Proyectos</td><td>"+strProyectos+"</td></tr>";
+
+		//Agregar filas a la tabla
+		$('#tbl_Datos > tbody:last').append(str_FilaNombre);
+		$('#tbl_Datos > tbody:last').append(str_FilaDepto);
+		$('#tbl_Datos > tbody:last').append(str_FilaGenero);
+		$('#tbl_Datos > tbody:last').append(str_FilaDireccion);
+		$('#tbl_Datos > tbody:last').append(str_FilaProyectos);
+		
+		//Agregar clases
+		$('#tbl_Datos td:first-child').addClass("classGris");		//Fondo gris solo primera columna
+		$('#tbl_Datos td').addClass("classBorde");							//Borde de celdas
+		
+	}
+  </script>
+	
+	<style type="text/css">
+		.classGris {		background-color: #F0F0F0; }
+		.classBorde {		border: 1px solid #F0F0F0;	}
+	</style>
+	</head>
+<body >
+
+	<h3>Ejemplo documento JSON</h3>
+	Da click en el enlace para realizar el test<br/>
+	&nbsp;&nbsp;<a href="#" id="enlace" >Realizar test</a><br/><br/>
+	
+	<!--	Tabla de datos	-->
+	<table id="tbl_Datos" border="0">
+		<tbody>
+		
+		</tbody>
+	</table>
+</body>
+<html>
